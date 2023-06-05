@@ -2,7 +2,7 @@ import boto3
 
 def return_size_of_bucket():
   s3 = boto3.client('s3')
-  bucket_name = 'datalakesemantix'
+  bucket_name = '<name_of_bucket>'
   prefix = None
 
   if prefix:
