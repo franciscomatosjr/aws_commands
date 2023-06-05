@@ -1,0 +1,20 @@
+import boto3
+
+def return_size_of_bucket():
+  s3 = boto3.client('s3')
+  bucket_name = 'datalakesemantix'
+  prefix = None
+
+  if prefix:
+      response = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+  else:
+      response = s3.list_objects_v2(Bucket=bucket_name)
+  objects = response['Contents']
+  total_size_bytes = sum(obj['Size'] for obj in objects)
+  total_size_mb = total_size_bytes / (1024 * 1024)
+
+  print(f'Tamanho da "pasta" "{prefix}" no bucket "{bucket_name}": {total_size_mb} MB')
+  
+  
+  if __name__ == '__main__':
+    return_size_of_bucket()
